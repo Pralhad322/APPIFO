@@ -2,17 +2,17 @@
 
 ## compiling and generating the plots for APPIFO
 
-genetate the jar file using the below command
-$ mvn clean compile assign:single
+* genetate the jar file using the below command
+`$ mvn clean compile assign:single`
 
-below command will generate the .statistics files.
-$ java -jar -ea NetBench.jar
+* Below command will generate the .statistics files.
+`$ java -jar -ea NetBench.jar`
 
-below command to extract the specific date to draw the plots
-$ python /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/analyze.py
+* Below command to extract the specific date to draw the plots
+`$ python /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/analyze.py`
 
-below command is used to draw the plots.
-$ gnuplot /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/plot.gnuplot
+* Below command is used to draw the plots.
+`$ gnuplot /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/plot.gnuplot`
 
 
 # SP-PIFO: Analysis and performance evaluation
