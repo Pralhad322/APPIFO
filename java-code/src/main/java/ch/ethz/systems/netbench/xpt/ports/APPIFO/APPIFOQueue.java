@@ -1,4 +1,4 @@
-package ch.ethz.systems.netbench.xpt.ports.SPPIFO;
+package ch.ethz.systems.netbench.xpt.ports.APPIFO;
 
 import ch.ethz.systems.netbench.core.log.SimulationLogger;
 import ch.ethz.systems.netbench.core.network.NetworkDevice;
@@ -21,7 +21,7 @@ public class APPIFOQueue implements Queue {
     private int ownId;
     private ReentrantLock reentrantLock;
 
-    public APPIFOQueue(long numQueues, long perQueueCapacity, NetworkDevice ownNetworkDevice, String stepSize){
+    public APPIFOQueue(long numQueues, long perQueueCapacity, NetworkDevice ownNetworkDevice){
         this.numQueues = (int) numQueues;
         this.perQueueCapacity = (int) perQueueCapacity;
         this.queueList = new ArrayList<>(this.numQueues);

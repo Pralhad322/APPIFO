@@ -9,10 +9,10 @@
 `$ java -jar -ea NetBench.jar`
 
 * Below command to extract the specific date to draw the plots
-`$ python /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/analyze.py`
+`$ python projects/sppifo/plots/sppifo_evaluation/fairness/analyze.py`
 
 * Below command is used to draw the plots.
-`$ gnuplot /home/pralhad/AIFO-main/aifo_simulation/java-code/projects/aifo/plots/aifo_evaluation/pFabric/web_search_workload/plot.gnuplot`
+`$ gnuplot projects/sppifo/plots/sppifo_evaluation/fairness/plot.gnuplot`
 
 
 # SP-PIFO: Analysis and performance evaluation

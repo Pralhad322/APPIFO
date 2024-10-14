@@ -1,4 +1,4 @@
-package ch.ethz.systems.netbench.xpt.ports.SPPIFO;
+package ch.ethz.systems.netbench.xpt.ports.APPIFO;
 
 import ch.ethz.systems.netbench.core.Simulator;
 import ch.ethz.systems.netbench.core.log.SimulationLogger;
@@ -9,8 +9,8 @@ import ch.ethz.systems.netbench.xpt.tcpbase.FullExtTcpPacket;
 
 public class APPIFOOutputPort extends OutputPort {
 
-    public APPIFOOutputPort(NetworkDevice ownNetworkDevice, NetworkDevice targetNetworkDevice, Link link, long numberQueues, long sizePerQueuePackets, String stepSize) {
-        super(ownNetworkDevice, targetNetworkDevice, link, new APPIFOQueue(numberQueues, sizePerQueuePackets, ownNetworkDevice, stepSize));
+    public APPIFOOutputPort(NetworkDevice ownNetworkDevice, NetworkDevice targetNetworkDevice, Link link, long numberQueues, long sizePerQueuePackets) {
+        super(ownNetworkDevice, targetNetworkDevice, link, new APPIFOQueue(numberQueues, sizePerQueuePackets, ownNetworkDevice));
     }
 
     /**
