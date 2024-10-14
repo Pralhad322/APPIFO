@@ -122,8 +122,9 @@ set ytics ("10^1" 10, "10^3" 1000, "10^5" 100000, "10^7" 10000000)
 plot "projects/sppifo/plots/sppifo_evaluation/fairness/web_search_workload/fairness_split_mean_fct_ms_32.dat" using 14:15:16 title "PIFO" linecolor rgb midnight lw 3, \
                 ''  using 8:9:10 title "AFQ" linecolor rgb aqua lw 3, \
                 ''  using 11:12:13 title "SP-PIFO" linecolor rgb ocean lw 3, \
+                ''  using 14:15:16 title "APPIFO" linecolor rgb sunset lw 3, \
                 ''  using 5:6:7  title "DCTCP" linecolor rgb wave lw 3, \
-                ''  using 2:3:4 title "TCP" linecolor rgb foam lw 3, \
-                ''  using 14:15:16 title "APPIFO" linecolor rgb sunset lw 3
+                ''  using 2:3:4 title "TCP" linecolor rgb foam lw 3
+                
 
 
