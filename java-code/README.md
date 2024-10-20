@@ -1,6 +1,6 @@
 # APPIFO
 
-## compiling and generating the plots for APPIFO
+## Compiling and generating the plots for APPIFO
 
 * genetate the jar file using the below command
 `$ mvn clean compile assign:single`

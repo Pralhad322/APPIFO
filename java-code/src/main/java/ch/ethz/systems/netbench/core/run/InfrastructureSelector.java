@@ -197,7 +197,8 @@ class InfrastructureSelector {
             case "appifo":
             return new APPIFOOutputPortGenerator(
                     Simulator.getConfiguration().getLongPropertyOrFail("output_port_number_queues"),
-                    Simulator.getConfiguration().getLongPropertyOrFail("output_port_max_size_per_queue_packets")
+                    Simulator.getConfiguration().getLongPropertyOrFail("output_port_max_size_per_queue_packets"),
+                    Simulator.getConfiguration().getPropertyOrFail("output_port_step_size")
             );
 
             case "greedy_simple":

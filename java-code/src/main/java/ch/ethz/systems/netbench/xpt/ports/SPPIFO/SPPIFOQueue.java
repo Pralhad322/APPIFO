@@ -8,7 +8,10 @@ import ch.ethz.systems.netbench.xpt.tcpbase.PriorityHeader;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.TimeUnit;
+
 
 public class SPPIFOQueue implements Queue {
 
@@ -16,10 +19,12 @@ public class SPPIFOQueue implements Queue {
     private final Map queueBounds;
     private int ownId;
     private String stepSize;
+    private final long perQueueCapacity;
 
     public SPPIFOQueue(long numQueues, long perQueueCapacity, NetworkDevice ownNetworkDevice, String stepSize){
         this.queueList = new ArrayList((int)numQueues);
         this.queueBounds = new HashMap();
+        this.perQueueCapacity = perQueueCapacity;
 
         ArrayBlockingQueue fifo;
         for (int i=0; i<(int)numQueues; i++){
@@ -42,18 +47,31 @@ public class SPPIFOQueue implements Queue {
 
         boolean returnValue = false;
 
+        // System.out.println("rank of the incoming packet: "+rank);
+        // System.out.println("queubond of first queue is "+ (int)queueBounds.get(0));
+
         // Mapping based on queue bounds
         int currentQueueBound;
         for (int q=queueList.size()-1; q>=0; q--){
             currentQueueBound = (int)queueBounds.get(q);
+            // q==0 condition always makes sure that packet is added into the lase queue if the rank of the packet is less than the queue bound
             if ((currentQueueBound <= rank) || q==0) {
+                if (queueList.get(q).size() == perQueueCapacity)
+                {
+                    returnValue = false;
+                    System.out.println("Packet droped. Queue is full");
+                    // break;
+                }
                 boolean result = queueList.get(q).offer(o);
                 if (!result){
                     returnValue = false;
+                    System.out.println("Packet droped. failed to enter the packet into the queue"+ q);
+                    // System.out.println("queubond of first queue is "+ (int)queueBounds.get(0));
                     break;
                 } else {
 
                     // Per-packet queue bound adaptation
+                    // System.out.println("Packet is intered into the queue "+q+" queue bound is chnaged to "+rank);
                     queueBounds.put(q, rank);
                     int cost = currentQueueBound - rank;
                     if (cost > 0){
@@ -78,8 +96,18 @@ public class SPPIFOQueue implements Queue {
                     break;
                 }
             }
+            else
+            {
+                // System.out.println("rank is out of the queue bound of queue "+q+" with queue bound "+currentQueueBound);
+            }
         }
+        // try {
+        //     TimeUnit.SECONDS.sleep(1); // Wait for 5 seconds
+        // } catch (InterruptedException e) {
+        //     System.err.println("Thread interrupted: " + e.getMessage());
+        // }
         return returnValue;
+            
     }
 
     @Override

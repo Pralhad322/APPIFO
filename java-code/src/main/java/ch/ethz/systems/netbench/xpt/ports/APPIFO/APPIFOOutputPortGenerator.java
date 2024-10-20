@@ -10,17 +10,19 @@ public class APPIFOOutputPortGenerator extends OutputPortGenerator {
 
     private final long numberQueues;
     private final long sizePerQueuePackets;
+    private final String stepSize;
     
 
-    public APPIFOOutputPortGenerator(long numberQueues, long sizePerQueuePackets) {
+    public APPIFOOutputPortGenerator(long numberQueues, long sizePerQueuePackets, String stepSize) {
         this.numberQueues = numberQueues;
         this.sizePerQueuePackets = sizePerQueuePackets;
+        this.stepSize = stepSize;
         SimulationLogger.logInfo("Port", "SPPIFO(numberQueues=" + numberQueues + ", sizePerQueuePackets=" + sizePerQueuePackets + ")");
     }
 
     @Override
     public OutputPort generate(NetworkDevice ownNetworkDevice, NetworkDevice towardsNetworkDevice, Link link) {
-        return new APPIFOOutputPort(ownNetworkDevice, towardsNetworkDevice, link, numberQueues, sizePerQueuePackets);
+        return new APPIFOOutputPort(ownNetworkDevice, towardsNetworkDevice, link, numberQueues, sizePerQueuePackets, stepSize);
     }
 
 }

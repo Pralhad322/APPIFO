@@ -59,7 +59,7 @@ public class PIFOQueue extends PriorityBlockingQueue implements Queue {
             /* Debug */
             message = message + "]\n";
             message = message + "Packet dropped: " + drop_packet.getPriority() + "(" + drop_packet.getEnqueueTime() + ")";
-            //System.out.println(message);
+            // System.out.println(message);
 
             return drop_packet;
         }

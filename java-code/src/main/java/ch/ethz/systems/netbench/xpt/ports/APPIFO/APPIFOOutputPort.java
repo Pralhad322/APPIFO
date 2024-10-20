@@ -9,8 +9,8 @@ import ch.ethz.systems.netbench.xpt.tcpbase.FullExtTcpPacket;
 
 public class APPIFOOutputPort extends OutputPort {
 
-    public APPIFOOutputPort(NetworkDevice ownNetworkDevice, NetworkDevice targetNetworkDevice, Link link, long numberQueues, long sizePerQueuePackets) {
-        super(ownNetworkDevice, targetNetworkDevice, link, new APPIFOQueue(numberQueues, sizePerQueuePackets, ownNetworkDevice));
+    public APPIFOOutputPort(NetworkDevice ownNetworkDevice, NetworkDevice targetNetworkDevice, Link link, long numberQueues, long sizePerQueuePackets, String stepSize) {
+        super(ownNetworkDevice, targetNetworkDevice, link, new APPIFOQueue1(numberQueues, sizePerQueuePackets, ownNetworkDevice, stepSize));
     }
 
     /**

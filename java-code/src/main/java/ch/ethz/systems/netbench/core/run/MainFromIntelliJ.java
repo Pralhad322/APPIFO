@@ -126,7 +126,16 @@ public class MainFromIntelliJ {
 
         // /* Figure 8: pFabric: FCT statistics across different flow sizes in web search workload */
 
-        //     MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/DCTCP.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/5200/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/7000/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/8900/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/11100/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/14150/APPIFO.properties"});
+            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/19000/APPIFO.properties"});
+
+
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/DCTCP.properties"});
         //     MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/TCP.properties"});
         //     MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/PIFO.properties"});
         //     MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/3600/SPPIFO.properties"});
@@ -162,129 +171,130 @@ public class MainFromIntelliJ {
         //     MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/pFabric/web_search_workload/19000/SPPIFO.properties"});
 
         //     /* Analyze and plot */
-        //     MainFromProperties.runCommand("python3 projects/sppifo/plots/sppifo_evaluation/pFabric/web_search_workload/analyze.py", true);
-        //     MainFromProperties.runCommand("gnuplot projects/sppifo/plots/sppifo_evaluation/pFabric/web_search_workload/plot.gnuplot", true);
+            MainFromProperties.runCommand("python3 projects/sppifo/plots/sppifo_evaluation/pFabric/web_search_workload/analyze.py", true);
+            MainFromProperties.runCommand("gnuplot projects/sppifo/plots/sppifo_evaluation/pFabric/web_search_workload/plot.gnuplot", true);
 
         /* Figure 9 and 10: Fairness FCT statistics */
 
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/APPIFO_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/APPIFO_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/APPIFO_32.properties"});
+
             /* Figure 9: Fairness: FCT statistics for all flows at different loads, over the web search workload */
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/APPIFO_32.properties"});
-
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/TCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/DCTCP.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/PIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/SPPIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/APPIFO_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/APPIFO_32.properties"});
-
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/3600/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/5200/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/7000/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/8900/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/11100/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/14150/SPPIFOWFQ_32.properties"});
+            
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/TCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/DCTCP.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/PIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/19000/SPPIFOWFQ_32.properties"});
+            
             /* Figure 10: Fairness: FCT statistics for all flows at different loads, when the number of queues is modified */
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/3600/SPPIFOWFQ_32.properties"});
 
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/7000/SPPIFOWFQ_32.properties"});
 
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/11100/SPPIFOWFQ_32.properties"});
 
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/PIFOWFQ_32.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_8.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_16.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_24.properties"});
-            MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/AFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/PIFOWFQ_32.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_8.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_16.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_24.properties"});
+            // MainFromProperties.main(new String[]{"projects/sppifo/runs/sppifo_evaluation/fairness/web_search_workload/queue_analysis/19000/SPPIFOWFQ_32.properties"});
 
             /* Analyze and plot */
             MainFromProperties.runCommand("python projects/sppifo/plots/sppifo_evaluation/fairness/analyze.py", true);
@@ -331,8 +341,8 @@ public class MainFromIntelliJ {
         //     MainFromProperties.main(new String[]{"projects/sppifo/runs/greedy_microbenchmark/max_rank/Greedy_Uniform_1000.properties"});
 
         //     /* Analyze and plot */
-        //     MainFromProperties.runCommand("python3 projects/sppifo/plots/greedy_microbenchmark/analyze.py", true);
-        //     MainFromProperties.runCommand("gnuplot projects/sppifo/plots/greedy_microbenchmark/plot.gnuplot", true);
+            // MainFromProperties.runCommand("python3 projects/sppifo/plots/greedy_microbenchmark/analyze.py", true);
+            // MainFromProperties.runCommand("gnuplot projects/sppifo/plots/greedy_microbenchmark/plot.gnuplot", true);
 
     }
 

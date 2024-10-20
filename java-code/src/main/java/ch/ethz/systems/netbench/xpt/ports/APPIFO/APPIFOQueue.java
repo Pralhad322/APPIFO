@@ -9,6 +9,8 @@ import ch.ethz.systems.netbench.xpt.tcpbase.PriorityHeader;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.TimeUnit;
+
 
 public class APPIFOQueue implements Queue {
 
@@ -45,38 +47,59 @@ public class APPIFOQueue implements Queue {
             // Extract rank from header
             Packet packet = (Packet) o;
             PriorityHeader header = (PriorityHeader) packet;
-            int rank = (int) header.getPriority();
+            int pre_rank = (int) header.getPriority();
+            // System.out.println("rank of the incoming packet is "+ pre_rank);
+
+            double r = (double) pre_rank / 1000000 * 7; // Scale to 0-7 (total 8 queues)
+            int rank = (int) r; // Cast to integer
+
+            // System.out.println("mapped rank of the incoming packet is "+ rank);
+            // System.out.println("highest priority queue is "+ highestPriorityQueueIndex);
+
 
             int targetQueue = (highestPriorityQueueIndex + rank) % numQueues;
 
-            for (int i = 0; i < numQueues; i++) {
-                int queueIndex = (targetQueue + i) % numQueues;
-                if (!fullQueues.get(queueIndex)) {
-                    boolean added = queueList.get(queueIndex).offer(packet);
-                    if (added) {
-                        packetCounts[queueIndex]++;
-                        if (packetCounts[queueIndex] == perQueueCapacity) {
-                            fullQueues.set(queueIndex);
-                        }
+            // System.out.println("target queue id is "+ targetQueue);
 
-                        // Log rank of packet enqueued and queue selected if enabled
-                        if (SimulationLogger.hasRankMappingEnabled()) {
-                            SimulationLogger.logRankMapping(this.ownId, rank, queueIndex);
-                        }
-
-                        if (SimulationLogger.hasQueueBoundTrackingEnabled()) {
-                            for (int c = numQueues - 1; c >= 0; c--) {
-                                SimulationLogger.logQueueBound(this.ownId, c, packetCounts[c]);
-                            }
-                        }
-
-                        return true;
+            if (!fullQueues.get(targetQueue)) {
+                boolean added = queueList.get(targetQueue).offer(packet);
+                if (added) {
+                    // System.out.println("packet with the rank "+rank+ " is added to the queue "+ targetQueue);
+                    packetCounts[targetQueue]++;
+                    if (packetCounts[targetQueue] == perQueueCapacity) {
+                        fullQueues.set(targetQueue);
                     }
+                    return true;
                 }
             }
+            else{
+                // System.out.println("target queue is full!\n serching in lower priority queues.........");
+                for (int i = (targetQueue -1 + numQueues) % numQueues; i != highestPriorityQueueIndex; i = (i - 1 + numQueues) % numQueues)
+                {
+                    if (!fullQueues.get(i)) {
+                        boolean added = queueList.get(i).offer(packet);
+                        if (added) {
+                            // System.out.println("packet with the rank "+rank+ " is added to the queue "+ i);
+                            packetCounts[i]++;
+                            if (packetCounts[i] == perQueueCapacity) {
+                                fullQueues.set(i);
+                            }
+                            return true;
+                        }
+                    }
+                    // System.out.println("queue "+i+" is full..");
+                }
+                // System.out.println("all the queues less then target queue are empty!");
+            }
+            // System.out.println("all the queues in the switch are full");
             return false; // All queues are full
         } finally {
             reentrantLock.unlock();
+            // try {
+            //     TimeUnit.SECONDS.sleep(1); // Wait for 5 seconds
+            // } catch (InterruptedException e) {
+            //     System.err.println("Thread interrupted: " + e.getMessage());
+            // }
         }
     }
 
@@ -88,51 +111,39 @@ public class APPIFOQueue implements Queue {
                 return null;
             }
 
+            // rotate the higher priority queue if the all the packets from the queue are dequeued or queue is empty
+            // it should be done on time basis
+
+            // System.out.println("dequeuing the packet...........");
+            while (packetCounts[highestPriorityQueueIndex] == 0) {
+                // System.out.println("changing the queue prioriy");
+                rotateQueuePriorities();
+                // System.out.println("head is "+highestPriorityQueueIndex);
+            }
+
             Packet p = queueList.get(highestPriorityQueueIndex).poll();
+
             if (p != null) {
+                // System.out.println("packet is dequeued form the highest priority queue "+ highestPriorityQueueIndex);
                 packetCounts[highestPriorityQueueIndex]--;
                 fullQueues.clear(highestPriorityQueueIndex);
 
-                PriorityHeader header = (PriorityHeader) p;
-                int rank = (int) header.getPriority();
-
-                // Log rank of packet dequeued and queue selected if enabled
-                if (SimulationLogger.hasRankMappingEnabled()) {
-                    SimulationLogger.logRankMapping(this.ownId, rank, highestPriorityQueueIndex);
-                }
-
-                if (SimulationLogger.hasQueueBoundTrackingEnabled()) {
-                    for (int c = numQueues - 1; c >= 0; c--) {
-                        SimulationLogger.logQueueBound(this.ownId, c, packetCounts[c]);
-                    }
-                }
-
-                // Check whether there is an inversion: a packet with smaller rank in queue than the one polled
-                if (SimulationLogger.hasInversionsTrackingEnabled()) {
-                    int count_inversions = 0;
-                    for (int i = 0; i <= numQueues - 1; i++) {
-                        Object[] currentQueue = queueList.get(i).toArray();
-                        for (int j = 0; j < currentQueue.length; j++) {
-                            int r = (int) ((FullExtTcpPacket) currentQueue[j]).getPriority();
-                            if (r < rank) {
-                                count_inversions++;
-                            }
-                        }
-                    }
-                    if (count_inversions != 0) {
-                        SimulationLogger.logInversionsPerRank(this.ownId, rank, count_inversions);
-                    }
-                }
-
-                if (packetCounts[highestPriorityQueueIndex] == 0) {
-                    rotateQueuePriorities();
-                }
-
+                // PriorityHeader header = (PriorityHeader) p;
+                // int rank = (int) header.getPriority();
                 return p;
             }
+            // if (packetCounts[highestPriorityQueueIndex] == 0) {
+            //     rotateQueuePriorities();
+            // }
+
             return null;
         } finally {
             reentrantLock.unlock();
+            // try {
+            //     TimeUnit.SECONDS.sleep(1); // Wait for 5 seconds
+            // } catch (InterruptedException e) {
+            //     System.err.println("Thread interrupted: " + e.getMessage());
+            // }
         }
     }
 
