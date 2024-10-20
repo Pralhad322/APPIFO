@@ -16,14 +16,14 @@ public class APPIFOQueue1 implements Queue<Packet> {
         float upper;
         TreeNode left;
         TreeNode right;
-        ArrayBlockingQueue<Packet> queue;
+        int queueIndex;
 
-        TreeNode(float bound) {
+        TreeNode(float bound, int queueIndex) {
             this.lower = bound;
             this.upper = bound;
             this.left = null;
             this.right = null;
-            this.queue = null;
+            this.queueIndex = queueIndex;
         }
     }
 
@@ -31,25 +31,34 @@ public class APPIFOQueue1 implements Queue<Packet> {
     private final long perQueueCapacity;
     private int ownId;
     private int totalQueues;
+    private List<ArrayBlockingQueue<Packet>> queueList;
+    private List<Float> queueBounds;
 
     public APPIFOQueue1(long numQueues, long perQueueCapacity, NetworkDevice ownNetworkDevice, String stepSize) {
         this.perQueueCapacity = perQueueCapacity;
         this.ownId = ownNetworkDevice.getIdentifier();
         this.totalQueues = (int)numQueues;
+        this.queueList = new ArrayList<>();
+        this.queueBounds = new ArrayList<>();
+        
+        for (int i = 0; i < totalQueues; i++) {
+            queueList.add(new ArrayBlockingQueue<>((int)perQueueCapacity));
+            queueBounds.add(0f);
+        }
+        
         this.root = buildTree(0, totalQueues - 1);
     }
 
     private TreeNode buildTree(int start, int end) {
         if (start > end) return null;
         
-        TreeNode node = new TreeNode(0);
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(0, mid);
         
         if (start == end) {
-            node.queue = new ArrayBlockingQueue<>((int)perQueueCapacity);
             return node;
         }
         
-        int mid = (start + end) / 2;
         node.left = buildTree(start, mid);
         node.right = buildTree(mid + 1, end);
         
@@ -71,13 +80,15 @@ public class APPIFOQueue1 implements Queue<Packet> {
         if (node == null) return false;
 
         if (start == end) {
-            if (node.queue.size() == perQueueCapacity) {
+            ArrayBlockingQueue<Packet> queue = queueList.get(node.queueIndex);
+            if (queue.size() == perQueueCapacity) {
                 return false;
             }
 
-            boolean result = node.queue.offer(packet);
+            boolean result = queue.offer(packet);
             if (result) {
                 node.lower = node.upper = rank;
+                queueBounds.set(node.queueIndex, rank);
                 updateBounds(root, start, 0, totalQueues - 1);
             }
             return result;
@@ -117,148 +128,175 @@ public class APPIFOQueue1 implements Queue<Packet> {
 
     @Override
     public Packet poll() {
-        return pollFromNode(root, 0, totalQueues - 1);
-    }
-
-    private Packet pollFromNode(TreeNode node, int start, int end) {
-        if (node == null) return null;
-
-        if (start == end) {
-            Packet p = node.queue.poll();
+        for (int q = 0; q < queueList.size(); q++) {
+            Packet p = queueList.get(q).poll();
             if (p != null) {
                 PriorityHeader header = (PriorityHeader) p;
-                float rank = header.getPriority();
+                int rank = (int)header.getPriority();
 
                 if(SimulationLogger.hasRankMappingEnabled()){
-                    SimulationLogger.logRankMapping(this.ownId, (int)rank, start);
+                    SimulationLogger.logRankMapping(this.ownId, rank, q);
                 }
 
                 if(SimulationLogger.hasQueueBoundTrackingEnabled()){
-                    logAllQueueBounds(root, 0, totalQueues - 1);
+                    for (int c = queueList.size() - 1; c >= 0; c--) {
+                        SimulationLogger.logQueueBound(this.ownId, c, queueBounds.get(c).intValue());
+                    }
                 }
 
                 if (SimulationLogger.hasInversionsTrackingEnabled()) {
-                    int count_inversions = countInversions(root, rank);
+                    int count_inversions = 0;
+                    for (int i = 0; i < queueList.size(); i++) {
+                        Object[] currentQueue = queueList.get(i).toArray();
+                        for (int j = 0; j < currentQueue.length; j++) {
+                            int r = (int) ((FullExtTcpPacket) currentQueue[j]).getPriority();
+                            if (r < rank) {
+                                count_inversions++;
+                            }
+                        }
+                    }
                     if (count_inversions != 0) {
-                        SimulationLogger.logInversionsPerRank(this.ownId, (int)rank, count_inversions);
+                        SimulationLogger.logInversionsPerRank(this.ownId, rank, count_inversions);
                     }
                 }
+                return p;
             }
-            return p;
         }
-
-        int mid = (start + end) / 2;
-        Packet leftPacket = pollFromNode(node.left, start, mid);
-        if (leftPacket != null) {
-            node.lower = (node.left.lower + node.left.upper) / 2;
-            return leftPacket;
-        }
-
-        Packet rightPacket = pollFromNode(node.right, mid + 1, end);
-        if (rightPacket != null) {
-            node.upper = (node.right.lower + node.right.upper) / 2;
-        }
-        return rightPacket;
+        return null;
     }
 
-    private void logAllQueueBounds(TreeNode node, int start, int end) {
-        if (node == null) return;
-        if (start == end) {
-            SimulationLogger.logQueueBound(this.ownId, start, (int)node.lower);
-            return;
+    @Override
+    public Packet peek() {
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            Packet p = queue.peek();
+            if (p != null) {
+                return p;
+            }
         }
-        int mid = (start + end) / 2;
-        logAllQueueBounds(node.left, start, mid);
-        logAllQueueBounds(node.right, mid + 1, end);
+        return null;
     }
 
-    private int countInversions(TreeNode node, float rank) {
-        if (node == null) return 0;
-        if (node.queue != null) {
-            int count = 0;
-            for (Packet p : node.queue) {
-                if (((PriorityHeader)p).getPriority() < rank) {
-                    count++;
-                }
-            }
-            return count;
+    @Override
+    public boolean add(Packet packet) {
+        if (offer(packet)) {
+            return true;
         }
-        return countInversions(node.left, rank) + countInversions(node.right, rank);
+        throw new IllegalStateException("Queue is full");
+    }
+
+    @Override
+    public Packet remove() {
+        Packet p = poll();
+        if (p == null) {
+            throw new NoSuchElementException();
+        }
+        return p;
+    }
+
+    @Override
+    public Packet element() {
+        Packet p = peek();
+        if (p == null) {
+            throw new NoSuchElementException();
+        }
+        return p;
+    }
+
+    @Override
+    public void clear() {
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            queue.clear();
+        }
+        for (int i = 0; i < queueBounds.size(); i++) {
+            queueBounds.set(i, 0f);
+        }
     }
 
     @Override
     public int size() {
-        return getSizeOfSubtree(root);
-    }
-
-    private int getSizeOfSubtree(TreeNode node) {
-        if (node == null) return 0;
-        if (node.queue != null) return node.queue.size();
-        return getSizeOfSubtree(node.left) + getSizeOfSubtree(node.right);
+        int totalSize = 0;
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            totalSize += queue.size();
+        }
+        return totalSize;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            if (!queue.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean contains(Object o) {
-        return containsInSubtree(root, (Packet)o);
-    }
-
-    private boolean containsInSubtree(TreeNode node, Packet packet) {
-        if (node == null) return false;
-        if (node.queue != null) return node.queue.contains(packet);
-        return containsInSubtree(node.left, packet) || containsInSubtree(node.right, packet);
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            if (queue.contains(o)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public Iterator<Packet> iterator() {
         return new Iterator<Packet>() {
-            private Queue<Packet> flattenedQueue = flattenTree();
-            
+            private int currentQueueIndex = 0;
+            private Iterator<Packet> currentQueueIterator = queueList.get(0).iterator();
+
             @Override
             public boolean hasNext() {
-                return !flattenedQueue.isEmpty();
+                while (!currentQueueIterator.hasNext() && currentQueueIndex < queueList.size() - 1) {
+                    currentQueueIndex++;
+                    currentQueueIterator = queueList.get(currentQueueIndex).iterator();
+                }
+                return currentQueueIterator.hasNext();
             }
-            
+
             @Override
             public Packet next() {
-                return flattenedQueue.poll();
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return currentQueueIterator.next();
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Remove operation is not supported");
             }
         };
     }
 
-    private Queue<Packet> flattenTree() {
-        Queue<Packet> result = new LinkedList<>();
-        flattenTreeHelper(root, result);
-        return result;
-    }
-
-    private void flattenTreeHelper(TreeNode node, Queue<Packet> result) {
-        if (node == null) return;
-        if (node.queue != null) {
-            result.addAll(node.queue);
-            return;
-        }
-        flattenTreeHelper(node.left, result);
-        flattenTreeHelper(node.right, result);
-    }
-
     @Override
     public Object[] toArray() {
-        return flattenTree().toArray();
+        List<Packet> allPackets = new ArrayList<>();
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            allPackets.addAll(queue);
+        }
+        return allPackets.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return flattenTree().toArray(a);
+        List<Packet> allPackets = new ArrayList<>();
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            allPackets.addAll(queue);
+        }
+        return allPackets.toArray(a);
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Remove operation is not supported for APPIFOQueue1");
+        for (ArrayBlockingQueue<Packet> queue : queueList) {
+            if (queue.remove(o)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -284,66 +322,23 @@ public class APPIFOQueue1 implements Queue<Packet> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException("RemoveAll operation is not supported for APPIFOQueue1");
+        boolean modified = false;
+        for (Object o : c) {
+            modified |= remove(o);
+        }
+        return modified;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException("RetainAll operation is not supported for APPIFOQueue1");
-    }
-
-    @Override
-    public void clear() {
-        clearSubtree(root);
-    }
-
-    private void clearSubtree(TreeNode node) {
-        if (node == null) return;
-        if (node.queue != null) {
-            node.queue.clear();
-            return;
+        boolean modified = false;
+        Iterator<Packet> iterator = iterator();
+        while (iterator.hasNext()) {
+            if (!c.contains(iterator.next())) {
+                iterator.remove();
+                modified = true;
+            }
         }
-        clearSubtree(node.left);
-        clearSubtree(node.right);
-    }
-
-    @Override
-    public Packet remove() {
-        Packet packet = poll();
-        if (packet == null) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        return packet;
-    }
-
-    @Override
-    public Packet element() {
-        Packet packet = peek();
-        if (packet == null) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        return packet;
-    }
-
-    @Override
-    public Packet peek() {
-        return peekFromSubtree(root);
-    }
-
-    private Packet peekFromSubtree(TreeNode node) {
-        if (node == null) return null;
-        if (node.queue != null) return node.queue.peek();
-        Packet leftPeek = peekFromSubtree(node.left);
-        if (leftPeek != null) return leftPeek;
-        return peekFromSubtree(node.right);
-    }
-
-    @Override
-    public boolean add(Packet packet) {
-        if (offer(packet)) {
-            return true;
-        } else {
-            throw new IllegalStateException("Queue is full");
-        }
+        return modified;
     }
 }
